@@ -45,8 +45,9 @@ export function WeekGrid({
       <div className="flex min-w-[560px]" style={{ paddingRight: 2 }}>
         <div className="w-12 shrink-0 pt-9 text-right text-[10px] text-slate-400">
           {Array.from({ length: rows + 1 }, (_, i) => (
-            <div key={i} style={{ height: i === rows ? 0 : rowH }} className="-mt-1.5 pr-1">
-              {i % 2 === 0 ? hourLabel(START + i * 30) : ""}
+            // Each row is exactly rowH tall (same as the grid rows); only the label text is nudged up to sit on the line.
+            <div key={i} style={{ height: i === rows ? 0 : rowH }} className="relative pr-1">
+              {i % 2 === 0 && <span className="absolute right-1 -top-1.5">{hourLabel(START + i * 30)}</span>}
             </div>
           ))}
         </div>
